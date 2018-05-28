@@ -1,0 +1,23 @@
+# File expfit
+#
+# ***Usage*** call 'expfit' '<datafile name>' ***
+#
+# Gnuplot script file to fit a Boltzmann equation to data already plotted with drawgraph and 
+# draw the fitted line onto the graph. If the y data points have error estimates
+# in column 4 of the datafile, the fit uses these to weight the points.
+#
+# The values of the fitted parameters, together with their standard errors, are
+# displayed on the terminal.
+#
+# S J Flockton, 12/9/03
+# Modified 2/10/03 to make the fitted line drawn as solid, rather than dashed
+# Modified3/10/03 from slfit.
+
+# First specify the type of function to be fitted
+f(x) = I0*exp(beta*x)
+
+# Then call the fitting routine, telling it which parameters to vary to obtain the fit.
+fit f(x) '$0' via I0, beta
+
+# Finally replot the data superimposing this line on the graph
+plot f(x) title 'Exponential fit', '$0' notitle with xyerrorbars

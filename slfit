@@ -1,0 +1,22 @@
+# File slfit
+#
+# ***Usage*** call 'slfit' '<datafile name>' ***
+#
+# Gnuplot script file to fit a straight line to data already plotted with drawgraph and 
+# draw the fitted line onto the graph. No use is made of any further columns to weight the fit.
+#
+# The gradient and intercept, together with their standard errors, are
+# displayed on the terminal.
+#
+# S J Flockton, 12/9/03
+# Modified 2/10/03 to make the fitted line drawn as solid, rather than dashed
+# Comments altered 16/7/04 to make clear that it is an unweighted fit.
+
+# First specify the type of function to be fitted, in this case a straight line.
+f(x) = m*x + c
+
+# Then call the fitting routine, telling it which parameters to vary to obtain the fit.
+fit f(x) '$0' via m, c
+
+# Finally replot the data superimposing this line on the graph
+plot f(x) title 'Straight line fit', '$0' notitle with xyerrorbars

@@ -1,0 +1,41 @@
+# Gnuplot script file for plotting data in a data file 
+# 
+# This file is called drawboxgraph
+#
+# ***Usage*** call 'drawboxgraph' '<datafile name>' '<title for the graph>' '<x-axis label>' '<y-axis label>' ***
+# 
+# Plots, using boxes, a set of x and y values (in the first two columns) 
+# Derived from drawgraph
+#
+# S J Flockton, 13/11/03. Modified 3/12/04 to unset mouse.
+# Modified 23/11/08 to only use the first two columns - if it is present, the third 
+# column is used for the width, which can cause trouble!
+#
+# This first line clears all previous settings - such as you may have from previous graphs.
+reset
+
+# This ensures your graphs will print clearly on a monochrome printer.
+set terminal windows monochrome 
+
+# This plots the data.
+
+plot '$0' using 1:2 title '' with boxes
+
+# These next four lines set the graph title, the axis labels and the timestamp.
+set title '$1';
+set xlabel '$2'
+set ylabel '$3'
+set timestamp "%a %b %d %Y %H:%M"
+
+# There seems to be a glitch with setting the terminal properties from a batch file -
+# it forgets them! So they need to be repeated here. This is not a problem when
+# using gnuplot interactively.
+set terminal windows monochrome
+
+unset mouse
+
+# and this replots the same data, now with the axis labels and timestamp. 
+# The two plots follow each other so quickly you will 
+# not see them separately.
+replot
+
